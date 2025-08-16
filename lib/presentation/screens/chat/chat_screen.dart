@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yes_no_app/presentation/widgets/chat/my_message_buble.dart';
 
 void main() => runApp(const ChatScreen());
 
@@ -20,7 +21,7 @@ class ChatScreen extends StatelessWidget {
         ),
         title: const Text("Neferpitou"),
       ),
-      body: _ChatView(),
+      body: const MyMessageBuble(),
     );
   }
 }
