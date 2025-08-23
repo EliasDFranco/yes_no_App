@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:yes_no_app/presentation/widgets/chat/her_message_bubble.dart';
 import 'package:yes_no_app/presentation/widgets/chat/my_message_buble.dart';
+import 'package:yes_no_app/presentation/widgets/share/message_field_box.dart';
 
 void main() => runApp(const ChatScreen());
 
@@ -9,8 +11,10 @@ class ChatScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.greenAccent,
+      backgroundColor: Colors.lightGreen,
       appBar: AppBar(
+        shadowColor: Colors.black,
+        backgroundColor: Colors.amber,
         leading: const Padding(
           padding: EdgeInsets.all(10),
           child: CircleAvatar(
@@ -21,7 +25,7 @@ class ChatScreen extends StatelessWidget {
         ),
         title: const Text("Neferpitou"),
       ),
-      body: const MyMessageBuble(),
+      body: _ChatView(),
     );
   }
 }
@@ -38,16 +42,12 @@ class _ChatView extends StatelessWidget {
               child: ListView.builder(
             itemCount: 100,
             itemBuilder: (context, index) {
-              return Text(
-                "Indice: $index",
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                    backgroundColor: Colors.greenAccent),
-              );
+              return (index % 2 == 0)
+                  ? const HerMessageBublle()
+                  : const MyMessageBuble();
             },
-          ))
+          )),
+          MessageFieldBox(),
         ]),
       ),
     );
