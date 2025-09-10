@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:yes_no_app/presentation/providers/chat_provider.dart';
 import 'package:yes_no_app/presentation/widgets/chat/her_message_bubble.dart';
 import 'package:yes_no_app/presentation/widgets/chat/my_message_buble.dart';
 import 'package:yes_no_app/presentation/widgets/share/message_field_box.dart';
+
+import '../../../domain/entitites/message.dart';
 
 void main() => runApp(const ChatScreen());
 
@@ -33,6 +37,8 @@ class ChatScreen extends StatelessWidget {
 class _ChatView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final chatProvider = context.watch<ChatProvider>();
+
     return SafeArea(
       // left: false, ESTO PARA QUE SE MUESTRE AL GIRAR NUESTRO DISPOSITIVO, SE MUESTRE EN LOS LADOS DE LOS BOTONES
       child: Padding(
@@ -40,14 +46,22 @@ class _ChatView extends StatelessWidget {
         child: Column(children: [
           Expanded(
               child: ListView.builder(
-            itemCount: 100,
+            controller: chatProvider.chatScrollControler,
+            itemCount: chatProvider.message.length,
             itemBuilder: (context, index) {
-              return (index % 2 == 0)
-                  ? const HerMessageBublle()
-                  : const MyMessageBuble();
+              final message = chatProvider.messageList[index];
+              return (message.fromWho == FromWho.hers)
+                  ? HerMessageBublle(
+                      message: message,
+                    )
+                  : MyMessageBuble();
             },
           )),
-          MessageFieldBox(),
+          MessageFieldBox(
+            onValue: (String value) {
+              chatProvider.sendMessage(value);
+            },
+          ),
         ]),
       ),
     );
