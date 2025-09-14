@@ -1,15 +1,14 @@
-import 'package:yes_no_app/domain/entitites/message.dart';
+import 'package:yes_no_app/domain/entities/message.dart';
 
 class YesNoModel {
-  final String answer;
-  final String forced;
-  final String image;
-
   YesNoModel({
     required this.answer,
     required this.forced,
     required this.image,
   });
+  final String answer;
+  final bool forced;
+  final String image;
 
   factory YesNoModel.fromJsonMap(Map<String, dynamic> json) => YesNoModel(
         answer: json["answer"],

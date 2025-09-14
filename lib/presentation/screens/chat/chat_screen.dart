@@ -5,7 +5,7 @@ import 'package:yes_no_app/presentation/widgets/chat/her_message_bubble.dart';
 import 'package:yes_no_app/presentation/widgets/chat/my_message_buble.dart';
 import 'package:yes_no_app/presentation/widgets/share/message_field_box.dart';
 
-import '../../../domain/entitites/message.dart';
+import '../../../domain/entities/message.dart';
 
 void main() => runApp(const ChatScreen());
 
@@ -46,15 +46,17 @@ class _ChatView extends StatelessWidget {
         child: Column(children: [
           Expanded(
               child: ListView.builder(
-            controller: chatProvider.chatScrollControler,
-            itemCount: chatProvider.message.length,
+            controller: chatProvider.chatScrollController,
+            itemCount: chatProvider.messageList.length,
             itemBuilder: (context, index) {
               final message = chatProvider.messageList[index];
               return (message.fromWho == FromWho.hers)
                   ? HerMessageBublle(
                       message: message,
                     )
-                  : MyMessageBuble();
+                  : MyMessageBuble(
+                      message: message
+                    );
             },
           )),
           MessageFieldBox(

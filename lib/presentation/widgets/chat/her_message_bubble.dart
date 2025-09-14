@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../domain/entitites/message.dart';
+import '../../../domain/entities/message.dart';
 
 class HerMessageBublle extends StatelessWidget {
   const HerMessageBublle({super.key, required this.message});
@@ -27,7 +27,7 @@ class HerMessageBublle extends StatelessWidget {
         const SizedBox(
           height: 5,
         ),
-        _ImageBuble(message.imageUrl!),
+        if (message.imageUrl != null) _ImageBuble(message.imageUrl!),
         const SizedBox(height: 10),
       ],
     );
