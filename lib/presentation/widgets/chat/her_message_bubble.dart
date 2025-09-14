@@ -12,6 +12,7 @@ class HerMessageBublle extends StatelessWidget {
     final colors = Theme.of(context).colorScheme;
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
           decoration: BoxDecoration(
@@ -41,7 +42,6 @@ class _ImageBuble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    print(size);
     return ClipRRect(
         borderRadius: BorderRadius.circular(15),
         child: Image.network(
